@@ -29,6 +29,7 @@ export function MenuCategory({ category }: { category: Category }) {
 function MenuItemCard({ item, categoryId }: { item: MenuItem; categoryId: string }) {
   const [qty, setQty] = useState(1)
   const addToCart = useCartStore((s) => s.addToCart)
+  const openChatWithProduct = useCartStore((s) => s.openChatWithProduct)
 
   return (
     <Card className="rounded-xl border-[#e8dcc0] shadow-sm dark:border-neutral-800">
@@ -69,7 +70,7 @@ function MenuItemCard({ item, categoryId }: { item: MenuItem; categoryId: string
           </Button>
           <Button
             className="ml-2 bg-gradient-to-r from-[#7a1c1c] via-[#a6342f] to-[#d4af37] text-white hover:brightness-105"
-            onClick={() => addToCart({ sku: item.sku, name: item.name, price: item.price, qty, categoryId })}
+            onClick={() => openChatWithProduct(item.name)}
           >
             Agregar
           </Button>

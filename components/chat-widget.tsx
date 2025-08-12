@@ -5,8 +5,8 @@ import { Sheet, SheetContent } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Loader2, Send, Bot, Check, X } from "lucide-react"
-import { MessageBubble, type Message } from "./message-bubble"
-import { useCartStore, cartSelectors } from "@/store/cart-store"
+import { MessageBubble } from "./message-bubble"
+import { useCartStore, cartSelectors, type Message } from "@/store/cart-store"
 import { formatARS } from "@/lib/format"
 import { useRouter } from "next/navigation"
 
@@ -26,10 +26,15 @@ export function ChatWidget() {
   const updateNotes = useCartStore((s) => s.updateNotes)
   const removeFromCart = useCartStore((s) => s.removeFromCart)
   const setPrimerPedido = useCartStore((s) => s.setPrimerPedido)
+  const resetSession = useCartStore((s) => s.resetSession)
   const total = useCartStore((s) => cartSelectors.total(s))
+  const chatPrefilledText = useCartStore((s) => s.chatPrefilledText)
+  const clearChatPrefilledText = useCartStore((s) => s.clearChatPrefilledText)
+  const messages = useCartStore((s) => s.messages)
+  const addMessage = useCartStore((s) => s.addMessage)
+  const setMessages = useCartStore((s) => s.setMessages)
 
   const [menu, setMenu] = useState<MenuJSON | null>(null)
-  const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState("")
   const [typing, setTyping] = useState(false)
   const [awaitingConfirm, setAwaitingConfirm] = useState(false)
@@ -48,21 +53,30 @@ export function ChatWidget() {
   }, [])
 
   useEffect(() => {
-    if (!isOpen) return
-    if (messages.length === 0) {
+    if (isOpen && messages.length === 0) {
+      // Solo inicializar mensaje de bienvenida si no hay mensajes previos
       const greeting = "Hola, ¿qué van a pedir?"
-      setMessages([{ id: "welcome", role: "assistant", content: greeting }])
+      addMessage({ id: "welcome", role: "assistant", content: greeting })
     }
-  }, [isOpen])
+    // No limpiar mensajes al cerrar - mantener la conversación
+  }, [isOpen, messages.length, addMessage])
 
   useEffect(() => {
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" })
   }, [messages, typing, awaitingConfirm])
 
+  // Manejar el texto pre-llenado cuando se abre el chat
+  useEffect(() => {
+    if (isOpen && chatPrefilledText) {
+      setInput(chatPrefilledText)
+      clearChatPrefilledText()
+    }
+  }, [isOpen, chatPrefilledText, clearChatPrefilledText])
+
   async function handleSend() {
     if (!input.trim() || !menu) return
     const userMessage: Message = { id: crypto.randomUUID(), role: "user", content: input.trim() }
-    setMessages((m) => [...m, userMessage])
+    addMessage(userMessage)
     setInput("")
     setTyping(true)
     setAwaitingConfirm(false)
@@ -114,15 +128,12 @@ export function ChatWidget() {
       })
 
       await new Promise((r) => setTimeout(r, 450))
-      setMessages((m) => [...m, { id: crypto.randomUUID(), role: "assistant", content: data.assistantMessage }])
+      addMessage({ id: crypto.randomUUID(), role: "assistant", content: data.assistantMessage })
       if (data.requireConfirmation) {
         setAwaitingConfirm(true)
       }
     } catch {
-      setMessages((m) => [
-        ...m,
-        { id: crypto.randomUUID(), role: "assistant", content: "Ocurrió un error. Intenta de nuevo." },
-      ])
+      addMessage({ id: crypto.randomUUID(), role: "assistant", content: "Ocurrió un error. Intenta de nuevo." })
     } finally {
       setTyping(false)
     }
@@ -136,14 +147,11 @@ export function ChatWidget() {
 
   function cancelConfirm() {
     setAwaitingConfirm(false)
-    setMessages((m) => [
-      ...m,
-      {
-        id: crypto.randomUUID(),
-        role: "assistant",
-        content: "Ok. ¿Te ayudo con algo más?",
-      },
-    ])
+    addMessage({
+      id: crypto.randomUUID(),
+      role: "assistant",
+      content: "Ok. ¿Te ayudo con algo más?",
+    })
   }
 
   const canSend = input.trim().length > 0

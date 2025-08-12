@@ -12,6 +12,12 @@ export type LineItem = {
   categoryId: string
 }
 
+export type Message = {
+  id: string
+  role: "user" | "assistant"
+  content: string
+}
+
 const BEVERAGE_CATEGORIES = new Set(["bebidas", "cerveza", "aperitivo", "caffetteria"])
 const MAIN_CATEGORIES = new Set(["carni", "risotti", "pesce", "polli", "la-nostra-pasta", "pasta-ripiena"])
 
@@ -20,7 +26,9 @@ type StoreState = {
   comensales: number
   primerPedido: boolean
   cart: LineItem[]
+  messages: Message[]
   isChatOpen: boolean
+  chatPrefilledText: string
 }
 
 type StoreActions = {
@@ -32,7 +40,12 @@ type StoreActions = {
   updateQty: (sku: string, qty: number) => void
   updateNotes: (sku: string, notes: string) => void
   clearCart: () => void
+  addMessage: (message: Message) => void
+  setMessages: (messages: Message[]) => void
+  resetSession: () => void
   setChatOpen: (b: boolean) => void
+  openChatWithProduct: (productName: string) => void
+  clearChatPrefilledText: () => void
 }
 
 type Store = StoreState & StoreActions
@@ -44,7 +57,9 @@ export const useCartStore = create<Store>()(
       comensales: 2,
       primerPedido: true,
       cart: [],
+      messages: [],
       isChatOpen: false,
+      chatPrefilledText: "",
 
       setMesa: (mesaId) => set({ mesaId }),
       setComensales: (n) => set({ comensales: Math.max(1, n) }),
@@ -86,7 +101,21 @@ export const useCartStore = create<Store>()(
 
       clearCart: () => set({ cart: [] }),
 
+      addMessage: (message) => set((state) => ({ messages: [...state.messages, message] })),
+      setMessages: (messages) => set({ messages }),
+
+      resetSession: () => set({ 
+        mesaId: "", 
+        comensales: 2, 
+        primerPedido: true, 
+        cart: [],
+        messages: [],
+        chatPrefilledText: ""
+      }),
+
       setChatOpen: (b) => set({ isChatOpen: b }),
+      openChatWithProduct: (productName) => set({ isChatOpen: true, chatPrefilledText: productName }),
+      clearChatPrefilledText: () => set({ chatPrefilledText: "" }),
     }),
     {
       name: "parolaccia-store",
@@ -95,6 +124,7 @@ export const useCartStore = create<Store>()(
         comensales: s.comensales,
         primerPedido: s.primerPedido,
         cart: s.cart,
+        messages: s.messages,
       }),
     },
   ),
