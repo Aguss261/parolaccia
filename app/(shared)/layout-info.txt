@@ -1,0 +1,1 @@
+Las páginas son Server Components por defecto y renderizan Client Components (Header, ChatWidget) para interactividad donde hace falta [^2]. Los Client Components usan 'use client' al inicio del archivo [^1]. El backend simulado se implementa con un Route Handler en app/api/assistant siguiendo el patrón Backend for Frontend [^3].

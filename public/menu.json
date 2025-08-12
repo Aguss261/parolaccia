@@ -1,0 +1,195 @@
+{
+  "currency": "ARS",
+  "categories": [
+    {
+      "id": "antipasti",
+      "name": "Antipasti",
+      "items": [
+        { "sku": "ANT-001", "name": "Melanzane alla parmigiana", "price": 18000 },
+        { "sku": "ANT-002", "name": "Rabas y zucchini frito", "price": 17000 },
+        { "sku": "ANT-003", "name": "Antipasto La Parolaccia", "price": 33000 },
+        { "sku": "ANT-004", "name": "Burrata con jamón crudo estilo italiano", "price": 24000 },
+        { "sku": "ANT-005", "name": "Calamaretti alla piastra", "price": 22500 },
+        { "sku": "ANT-006", "name": "Tartare di salmone", "price": 24000 },
+        { "sku": "ANT-007", "name": "Gamberi alla milanese", "price": 30500 }
+      ]
+    },
+    {
+      "id": "insalate",
+      "name": "Insalate",
+      "items": [
+        { "sku": "INS-001", "name": "Caesar con pollo", "price": 29000 },
+        { "sku": "INS-002", "name": "La Parolaccia", "price": 19500 },
+        { "sku": "INS-003", "name": "Rúcola, calamaretti e gamberi", "price": 24500 },
+        { "sku": "INS-004", "name": "Camembert del campo", "price": 27500 }
+      ]
+    },
+    {
+      "id": "risotti",
+      "name": "Risotti",
+      "items": [
+        { "sku": "RIS-001", "name": "Risotto Frutti di Mare (sin tacc)", "price": 36000 },
+        { "sku": "RIS-002", "name": "Risotto ai funghi", "price": 29000 }
+      ]
+    },
+    {
+      "id": "pesce",
+      "name": "Pesce",
+      "items": [{ "sku": "PES-001", "name": "Abadejo alla siciliana", "price": 37000 }]
+    },
+    {
+      "id": "carni",
+      "name": "Carni",
+      "items": [
+        { "sku": "CAR-001", "name": "Bife de chorizo (300 g)", "price": 32500 },
+        { "sku": "CAR-002", "name": "Milanese di Vitello alla parmigiana", "price": 31500 },
+        { "sku": "CAR-003", "name": "Milanese di Vitello con fettuccine Alfredo", "price": 31500 }
+      ]
+    },
+    {
+      "id": "polli",
+      "name": "Polli",
+      "items": [
+        { "sku": "POL-001", "name": "Pollito al limone", "price": 25000 },
+        { "sku": "POL-002", "name": "Suprema dell egeo", "price": 25000 },
+        { "sku": "POL-003", "name": "Paillard di pollo alla griglia", "price": 22000 }
+      ]
+    },
+    {
+      "id": "pasta-ripiena",
+      "name": "Pasta Ripiena",
+      "items": [
+        { "sku": "RIP-001", "name": "Sorrentinos gran caruso", "price": 27500 },
+        { "sku": "RIP-002", "name": "Sorrentinos uso nostro", "price": 27500 },
+        { "sku": "RIP-003", "name": "Cappelletti al gruyere gratinati", "price": 27500 },
+        { "sku": "RIP-004", "name": "Cappellacci di zucca al mascarpone", "price": 27500 },
+        { "sku": "RIP-005", "name": "Lasagna alla bolognese", "price": 27500 },
+        { "sku": "RIP-006", "name": "Ravioloni di brasato ai funghi", "price": 27500 },
+        { "sku": "RIP-007", "name": "Ravioli di burrata pomodoro e melanzane", "price": 27500 },
+        { "sku": "RIP-008", "name": "Tortelloni verdi di gruyere", "price": 27500 }
+      ]
+    },
+    {
+      "id": "la-nostra-pasta",
+      "name": "La Nostra Pasta",
+      "items": [
+        { "sku": "PAS-001", "name": "Fettuccine alla bolognese", "price": 26000 },
+        { "sku": "PAS-002", "name": "Fettuccine Alfredo", "price": 26000 },
+        { "sku": "PAS-003", "name": "Gnocchi souffle La Parolaccia", "price": 26000 },
+        { "sku": "PAS-004", "name": "Gnocchi di patate gorgonzola", "price": 26000 },
+        { "sku": "PAS-005", "name": "Gnocchi di patate bolognese", "price": 26000 },
+        { "sku": "PAS-006", "name": "Bucatini con polpette di vitello", "price": 26000 },
+        { "sku": "PAS-007", "name": "Rigatoni all'arrabbiata", "price": 26000 },
+        { "sku": "PAS-008", "name": "Cuerdas de guitarra pomodoro e basilico", "price": 26000 },
+        { "sku": "PAS-009", "name": "Spaghetti cacio e pepe", "price": 26000 },
+        { "sku": "PAS-010", "name": "Spaghetti alla napoletana", "price": 26000 },
+        { "sku": "PAS-011", "name": "Trofie al pesto genovese", "price": 26000 },
+        { "sku": "PAS-012", "name": "Fusilli al fierrito don corleone", "price": 26000 },
+        { "sku": "PAS-013", "name": "Malfatti di spinaci", "price": 26000 },
+        { "sku": "PAS-014", "name": "Penne Rigate pomodoro e basílico (sin tacc)", "price": 32000 },
+        { "sku": "PAS-015", "name": "Spaghetti ai frutti di mare", "price": 30000 },
+        { "sku": "PAS-016", "name": "Ravioli neri panna e gamberi", "price": 28500 },
+        { "sku": "PAS-017", "name": "Tagliolini nere panna e gamberi", "price": 28500 },
+        { "sku": "PAS-018", "name": "Lasagna di vegetales", "price": 27500 },
+        { "sku": "PAS-019", "name": "Ravioli verdi scarparo", "price": 27500 },
+        { "sku": "PAS-020", "name": "Crepe di spinaci alla romana", "price": 26000 }
+      ]
+    },
+    {
+      "id": "dolci",
+      "name": "Dolci",
+      "items": [
+        { "sku": "DOL-001", "name": "Volcán de dulce de leche", "price": 11500 },
+        { "sku": "DOL-002", "name": "Tatén de mela con gelato", "price": 11500 },
+        { "sku": "DOL-003", "name": "Merengatta", "price": 11500 },
+        { "sku": "DOL-004", "name": "Tiramisú al mascarpone", "price": 11500 },
+        { "sku": "DOL-005", "name": "Seduzione di cioccolato", "price": 11500 },
+        { "sku": "DOL-006", "name": "Crepe de dulce de leche", "price": 11500 },
+        { "sku": "DOL-007", "name": "Gelato", "price": 11500 },
+        { "sku": "DOL-008", "name": "Mousse di cioccolato (Sin tacc)", "price": 11500 },
+        { "sku": "DOL-009", "name": "Piccola torta di limone", "price": 11500 },
+        { "sku": "DOL-010", "name": "Flan de claras", "price": 11500 }
+      ]
+    },
+    {
+      "id": "caffetteria",
+      "name": "Caffetteria",
+      "items": [
+        { "sku": "CAF-001", "name": "Caffè expresso", "price": 3800 },
+        { "sku": "CAF-002", "name": "Caffè expresso en jarrito", "price": 4600 },
+        { "sku": "CAF-003", "name": "Té", "price": 3800 }
+      ]
+    },
+    {
+      "id": "bebidas",
+      "name": "Bebidas",
+      "items": [
+        { "sku": "BEB-001", "name": "Limonada", "price": 5000 },
+        { "sku": "BEB-002", "name": "Agua Mineral", "price": 3800 },
+        { "sku": "BEB-003", "name": "Jugo Exprimido de Naranja", "price": 5000 },
+        { "sku": "BEB-004", "name": "Villa del Sur Levité", "price": 3800 },
+        { "sku": "BEB-005", "name": "Gaseosas", "price": 3800 },
+        { "sku": "BEB-006", "name": "We by Ser (Citrus - Lemon)", "price": 3800 }
+      ]
+    },
+    {
+      "id": "cerveza",
+      "name": "Cerveza",
+      "items": [
+        { "sku": "CERV-001", "name": "Imperial (500 cc)", "price": 5300 },
+        { "sku": "CERV-002", "name": "Imperial Cream Stout (500 cc)", "price": 5300 },
+        { "sku": "CERV-003", "name": "Imperial Roja (500 cc)", "price": 5300 },
+        { "sku": "CERV-004", "name": "Imperial IPA (500 cc)", "price": 5300 },
+        { "sku": "CERV-005", "name": "Miller (355 cc)", "price": 5050 },
+        { "sku": "CERV-006", "name": "Heineken (330 cc)", "price": 5100 },
+        { "sku": "CERV-007", "name": "Heineken 0.0 (355 cc)", "price": 5100 }
+      ]
+    },
+    {
+      "id": "aperitivo",
+      "name": "Aperitivo",
+      "items": [
+        { "sku": "APE-001", "name": "Ramazzotti Tonic", "price": 8500 },
+        { "sku": "APE-002", "name": "Ramazzotti Spritz", "price": 8500 }
+      ]
+    },
+    {
+      "id": "vinos-burbujas",
+      "name": "Vinos · Burbujas",
+      "items": [
+        { "sku": "VBU-001", "name": "Chandon Extra Brut", "price": 23000 },
+        { "sku": "VBU-002", "name": "Baron B Extra Brut - Cuvée Spéciale", "price": 40500 }
+      ]
+    },
+    {
+      "id": "vinos-blancos",
+      "name": "Vinos · Blancos",
+      "items": [
+        { "sku": "VBL-001", "name": "Terrazas de los Andes Reserva Chardonnay", "price": 21000 },
+        { "sku": "VBL-002", "name": "Mariflor Sauvignon Blanc", "price": 40000 }
+      ]
+    },
+    {
+      "id": "vinos-rosados",
+      "name": "Vinos · Rosados",
+      "items": [{ "sku": "VRO-001", "name": "Trumpeter Reserva Rosé", "price": 20000 }]
+    },
+    {
+      "id": "vinos-tintos",
+      "name": "Vinos · Tintos",
+      "items": [
+        { "sku": "VTI-001", "name": "Salentein Reserva Malbec", "price": 19000 },
+        { "sku": "VTI-002", "name": "Luigi Bosca Malbec", "price": 29000 },
+        { "sku": "VTI-003", "name": "DV Catena Cabernet - Malbec", "price": 26500 }
+      ]
+    },
+    {
+      "id": "vinos-en-copa",
+      "name": "Vinos en Copa",
+      "items": [
+        { "sku": "VCO-001", "name": "DV Catena Chardonnay-Chardonnay (copa)", "price": 10000 },
+        { "sku": "VCO-002", "name": "Luca Malbec (copa)", "price": 18000 }
+      ]
+    }
+  ]
+}
