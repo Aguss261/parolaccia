@@ -1,0 +1,26 @@
+/* playfair-display-regular - latin */
+@font-face {
+  font-display: swap; 
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/playfair-display-v30-latin-regular.woff2') format('woff2'); 
+}
+
+/* source-sans-3-regular - latin */
+@font-face {
+  font-display: swap; 
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/source-sans-3-v10-latin-regular.woff2') format('woff2'); 
+}
+
+/* source-sans-3-700 - latin */
+@font-face {
+  font-display: swap; 
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/fonts/source-sans-3-v10-latin-700.woff2') format('woff2');
+}

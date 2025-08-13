@@ -2,7 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
-import { display, body } from "@/app/fonts"
+import "@/app/fonts.css"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -24,12 +24,12 @@ html {
   font-family: ${GeistSans.style.fontFamily};
   --font-sans: ${GeistSans.variable};
   --font-mono: ${GeistMono.variable};
-  --font-body: ${body.style.fontFamily};
-  --font-display: ${display.style.fontFamily};
+  --font-display: 'Playfair Display';
+  --font-body: 'Source Sans 3';
 }
         `}</style>
       </head>
-      <body className={`min-h-screen ${body.variable} ${display.variable} font-[family-name:var(--font-body)]`}>
+      <body className="min-h-screen font-body">
         {children}
       </body>
     </html>
