@@ -107,7 +107,9 @@ export default function MenuPage() {
         setLoading(true)
         setError(null)
         
-        const response = await fetch("/api/productos")
+        // Use the current origin to ensure the request goes to the correct Next.js server
+        const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
+        const response = await fetch(`${baseUrl}/api/productos`)
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
