@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  parolaccia-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    container_name: parolaccia-app
+    
+  # Optional: Add a development service for hot reloading
+  parolaccia-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    restart: unless-stopped
+    container_name: parolaccia-dev
+    profiles:
+      - dev
