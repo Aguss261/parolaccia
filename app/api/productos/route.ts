@@ -2,8 +2,11 @@ import { NextResponse } from 'next/server'
 
 export async function GET() {
   try {
+    // Get backend URL from environment variable, fallback to localhost for development
+    const backendUrl = process.env.BACKEND_URL || 'http://localhost:5000';
+    
     // Fetch data from your external API
-    const response = await fetch('http://localhost:5000/api/productos', {
+    const response = await fetch(`${backendUrl}/api/productos`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
