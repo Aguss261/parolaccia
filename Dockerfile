@@ -1,10 +1,6 @@
 # Use the official Node.js 18 image as base
 FROM node:18-alpine AS base
 
-# Add DNS configuration for better network resolution
-RUN echo "nameserver 8.8.8.8" > /etc/resolv.conf && \
-    echo "nameserver 1.1.1.1" >> /etc/resolv.conf
-
 # Install production dependencies only
 FROM base AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
