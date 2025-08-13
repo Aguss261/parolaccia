@@ -26,9 +26,9 @@ export function MenuCategory({ category }: { category: Category }) {
   )
 }
 
-function MenuItemCard({ item, categoryId }: { item: MenuItem; categoryId: string }) {
+function MenuItemCard({ item }: { item: MenuItem; categoryId: string }) {
   const [qty, setQty] = useState(1)
-  const addToCart = useCartStore((s) => s.addToCart)
+  // const addToCart = useCartStore((s) => s.addToCart) // Commented out to fix unused var
   const openChatWithProduct = useCartStore((s) => s.openChatWithProduct)
 
   return (

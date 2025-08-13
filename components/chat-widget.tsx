@@ -26,13 +26,13 @@ export function ChatWidget() {
   const updateNotes = useCartStore((s) => s.updateNotes)
   const removeFromCart = useCartStore((s) => s.removeFromCart)
   const setPrimerPedido = useCartStore((s) => s.setPrimerPedido)
-  const resetSession = useCartStore((s) => s.resetSession)
+  // const resetSession = useCartStore((s) => s.resetSession) // Commented out to fix unused var
   const total = useCartStore((s) => cartSelectors.total(s))
   const chatPrefilledText = useCartStore((s) => s.chatPrefilledText)
   const clearChatPrefilledText = useCartStore((s) => s.clearChatPrefilledText)
   const messages = useCartStore((s) => s.messages)
   const addMessage = useCartStore((s) => s.addMessage)
-  const setMessages = useCartStore((s) => s.setMessages)
+  // const setMessages = useCartStore((s) => s.setMessages) // Commented out to fix unused var
 
   const [menu, setMenu] = useState<MenuJSON | null>(null)
   const [input, setInput] = useState("")
@@ -169,7 +169,7 @@ export function ChatWidget() {
             <h2 className="text-sm font-semibold font-[family-name:var(--font-display)]">Asistente Parolaccia</h2>
           </div>
 
-          <div ref={listRef as any} className="h-[55vh] overflow-y-auto px-3 py-3" aria-live="polite">
+          <div ref={listRef} className="h-[55vh] overflow-y-auto px-3 py-3" aria-live="polite">
             {messages.map((msg) => (
               <MessageBubble key={msg.id} role={msg.role} content={msg.content} />
             ))}

@@ -9,11 +9,33 @@ import { MenuCategory, type Category } from "@/components/menu-category"
 
 type MenuJSON = { currency: string; categories: Category[] }
 
+// Interface for API product data
+interface ApiProduct {
+  categoria?: string;
+  categoryId?: string;
+  categoryName?: string;
+  nombreCategoria?: string;
+  sku?: string;
+  id?: string;
+  name?: string;
+  nombre?: string;
+  price?: number;
+  precio?: number;
+}
+
+// Interface for API response
+interface ApiResponse {
+  currency?: string;
+  categories?: Category[];
+  productos?: ApiProduct[];
+}
+
 // Function to transform API response to expected format if needed
-function transformApiResponse(data: any): MenuJSON {
+function transformApiResponse(data: unknown): MenuJSON {
   // If the API response already matches the expected format, return as is
-  if (data && data.currency && Array.isArray(data.categories)) {
-    return data as MenuJSON
+  const apiData = data as ApiResponse;
+  if (apiData && apiData.currency && Array.isArray(apiData.categories)) {
+    return apiData as MenuJSON
   }
   
   // If the API response is just an array of products, transform it
@@ -21,12 +43,12 @@ function transformApiResponse(data: any): MenuJSON {
     // Group products by category
     const categoriesMap = new Map<string, Category>()
     
-    data.forEach((product: any) => {
+    (data as ApiProduct[]).forEach((product: ApiProduct) => {
       // Usar el campo categoria de la API y asegurarse de que sea consistente
-      const categoryId = product.categoria || product.categoryId || 'Otros'
+      const categoryId = String(product.categoria || product.categoryId || 'Otros')
       
       // Formatear el nombre de la categoría para mostrar (primera letra mayúscula, resto minúsculas)
-      let categoryName = product.categoria || product.categoryName || product.nombreCategoria || 'Otros'
+      let categoryName = String(product.categoria || product.categoryName || product.nombreCategoria || 'Otros')
       
       // Convertir el nombre de la categoría a un formato más legible (primera letra mayúscula, resto minúsculas)
       if (categoryName === categoryName.toUpperCase()) {
@@ -46,9 +68,9 @@ function transformApiResponse(data: any): MenuJSON {
       
       const category = categoriesMap.get(categoryId)!
       category.items.push({
-        sku: product.sku || product.id || `PROD-${Date.now()}`,
-        name: product.name || product.nombre || 'Producto sin nombre',
-        price: product.price || product.precio || 0
+        sku: String(product.sku || product.id || `PROD-${Date.now()}`),
+        name: String(product.name || product.nombre || 'Producto sin nombre'),
+        price: Number(product.price || product.precio || 0)
       })
     })
     
@@ -59,8 +81,8 @@ function transformApiResponse(data: any): MenuJSON {
   }
   
   // If the API response has a different structure, try to adapt
-  if (data && data.productos) {
-    return transformApiResponse(data.productos)
+  if (apiData && apiData.productos) {
+    return transformApiResponse(apiData.productos)
   }
   
   // Fallback: return empty menu
@@ -74,7 +96,7 @@ export default function MenuPage() {
   const [menu, setMenu] = useState<MenuJSON | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [rawApiData, setRawApiData] = useState<any>(null)
+  // Removed unused variable to fix eslint error
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -91,8 +113,8 @@ export default function MenuPage() {
         const data = await response.json()
         console.log('API Raw Response:', data)
         
-        // Guardar los datos crudos para mostrarlos en la interfaz
-        setRawApiData(data)
+        // Log raw data for debugging
+        console.log('Raw API data:', data)
         
         // Mostrar un ejemplo del primer producto para depuración
         if (Array.isArray(data) && data.length > 0) {
