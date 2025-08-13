@@ -7,7 +7,10 @@ import { ChatWidget } from "@/components/chat-widget"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { MenuCategory, type Category } from "@/components/menu-category"
 
-type MenuJSON = { currency: string; categories: Category[] }
+// Local type definitions to ensure proper TypeScript resolution
+type MenuItem = { sku: string; name: string; price: number }
+type LocalCategory = { id: string; name: string; items: MenuItem[] }
+type MenuJSON = { currency: string; categories: LocalCategory[] }
 
 // Interface for API product data
 interface ApiProduct {
@@ -31,7 +34,7 @@ interface ApiResponse {
 }
 
 // Function to transform API response to expected format if needed
-function transformApiResponse(data: unknown): MenuJSON {
+const transformApiResponse = (data: unknown): MenuJSON => {
   // If the API response already matches the expected format, return as is
   const apiData = data as ApiResponse;
   if (apiData && apiData.currency && Array.isArray(apiData.categories)) {
@@ -41,7 +44,7 @@ function transformApiResponse(data: unknown): MenuJSON {
   // If the API response is just an array of products, transform it
   if (Array.isArray(data)) {
     // Group products by category
-    const categoriesMap = new Map<string, Category>()
+    const categoriesMap: Record<string, LocalCategory> = {}
     
     (data as ApiProduct[]).forEach((product: ApiProduct) => {
       // Usar el campo categoria de la API y asegurarse de que sea consistente
@@ -58,15 +61,15 @@ function transformApiResponse(data: unknown): MenuJSON {
       // Reemplazar guiones por espacios para categorías como "PASTA-RIPIENA"
       categoryName = categoryName.replace(/-/g, ' ')
       
-      if (!categoriesMap.has(categoryId)) {
-        categoriesMap.set(categoryId, {
+      if (!categoriesMap[categoryId]) {
+        categoriesMap[categoryId] = {
           id: categoryId,
           name: categoryName,
           items: []
-        })
+        }
       }
       
-      const category = categoriesMap.get(categoryId)!
+      const category = categoriesMap[categoryId]!
       category.items.push({
         sku: String(product.sku || product.id || `PROD-${Date.now()}`),
         name: String(product.name || product.nombre || 'Producto sin nombre'),
@@ -76,7 +79,7 @@ function transformApiResponse(data: unknown): MenuJSON {
     
     return {
       currency: 'ARS',
-      categories: Array.from(categoriesMap.values())
+      categories: Object.values(categoriesMap)
     }
   }
   
@@ -168,7 +171,7 @@ export default function MenuPage() {
                 </AccordionTrigger>
                 <AccordionContent>
                   <div className="py-2">
-                    <MenuCategory category={cat} />
+                    <MenuCategory category={cat as Category} />
                   </div>
                 </AccordionContent>
               </AccordionItem>
